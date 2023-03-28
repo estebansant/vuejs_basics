@@ -11,9 +11,18 @@
   <div id="app" :style="{background: '#' + color}">
     
     <coin-detail 
+      v-on:change-color="updateColor"
       :coin="btc"
       :color="color"
-    ></coin-detail>
+    >
+    <template v-slot:text>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore, cum blanditiis tenetur et illo earum. Cumque incidunt, iure deleniti doloribus praesentium molestiae, voluptatum consectetur minima quis sint veritatis sit esse?</p>
+    </template>
+    <template v-slot:link>
+      <a href="">Reload!</a>
+    </template>
+
+    </coin-detail>
 
   </div>
   

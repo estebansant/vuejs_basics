@@ -9,20 +9,27 @@
 </head>
 <body>
   <div id="app">
-    <h1>
+    <h1 :class="changePercent > 0 ? 'green' : 'red' ">
       {{ name }}
       <span v-if="changePercent > 0">👌</span>
       <span v-else-if="changePercent < 0">👎</span>
       <span v-else>🍀</span>
     </h1>
-    <img :src="img" :alt="name"/>
+    <img
+      v-on:mouseover="toggleShowPrices"
+      v-on:mouseout="toggleShowPrices"
+      :src="img"
+      :alt="name"
+    />
 
-    <ul>
-      <li v-for="(number, i) in prices" :key="i">{{ number }}</li>
-    </ul>
+    <button v-on:click="toggleShowPrices">{{ showPrices ? 'Hide prices' : 'Show prices'}}</button>
 
-    <ul>
-      <li v-for="(number, i) in pricesWithDays" :key="i">{{ number.day }} - {{ number.value }}</li>
+    <ul v-show="showPrices === true">
+      <li 
+        class="uppercase"
+        :class="{ orange: number.value == price, red: number.value < price, green: number.value > price}"
+        v-for="(number, i) in pricesWithDays"
+        :key="i">{{ number.day }} - {{ number.value }}</li>
     </ul>
 
   </div>
